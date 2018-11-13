@@ -16,13 +16,24 @@
 		}
 		img{
 			max-width: 100%;
-			vertical-align: top; 
+			vertical-align: top;
+			/*display: none;*/
+		}
+		img#responsive{
+				display: none;
+			}
+		@media screen and (max-width: 768px){
+			img#responsive{
+				display: block;
+			}
 		}
 	</style>
 	<body>
+		<img src="Responsive.png" id="responsive">
 		<img src="header.jpg">
 		<img src="Hero.jpg">
 		<img src="acustica.jpg">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		<img src="clasica.jpg">
@@ -31,5 +42,7 @@
 >>>>>>> hotfix
 =======
 >>>>>>> hotfix
+=======
+>>>>>>> responsive
 	</body>
 </html>
