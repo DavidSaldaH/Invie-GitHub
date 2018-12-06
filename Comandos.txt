@@ -1,0 +1,138 @@
+// Congigurar Git
+git config --global user.name -> Para asignar el nombre.
+git config --global user.email -> Para asignar el email.
+git config --global core.editor ‘D:\Programas\Sublime\subl.exe’ -w -> para poner sublime como editor predeterminado.
+
+// Agregar archivos
+git init [Nombre del repositorio] -> Crea una carpeta con un repositorio nuevo.
+git add [archivo] -> agrega un archivo al seguimiento (-A Agrega todos los archivos del Working Directory).
+git init add -n [file or directory] -> Simula el agregado de un archivo pero solo lo hace para verificar si existe.
+git commit -m "mensaje" -> staging de los archivos en seguimiento.
+git commit --amend -> agrega nuevos cambios a un commit previo.
+
+// Eliminar archivos
+git rm --cached [file or directory] -> Elimina un archivo o carpeta del Staging Area y lo deja en el Working Directory.
+git rm --f [file or directory] -> Fuerza la eliminación de un archivo o carpeta hasta del del Working Directory.
+
+// Información 
+git status -> Muestra el estado de los archivos o directorios.
+git log -> muestra información sobre los commits enviados.
+git log --oneline -> Muestra los commits de manera resumida.
+git log --graph -> Muestra las rutas de desarrollo de las branchs.
+
+
+// Etiquetas
+
+* Ligeras -> Es solo para indicar un punto en el proyecto, una etiqueta sencilla (Versionamiento):
+git tag [Nombre o indicador de la etiqueta]
+* Anotada -> Es una etiqueta con mensaje y referencia de etiqueta que puede llevar mas parametros que la liviana:
+git tag -a [Numero de version] -m [Version estable]
+git tag -l -> muestra los tags hechos.
+
+Para hacer tag a un commit viejo se nececita el Hash que es el codigo unico del commit (sale con el momando git log)
+ejemplo : git tag 0.3 9a42fd1fad1d5c29669abc1881d9a54cb8649b13 esto generará una etiqueta liviana.
+
+git tag -d [nombre del tag] -> borra el tag.
+git tag -f -a 0.1 -m "Primer Commit" 7f44fcfd2d99df4a858345f44eb9381be90fc227 -> modifica el tag que se especificó.
+
+// Personalizar GitLog
+git log --oneline -> resume los las operaciones hechas en git (visualmente mas comodo de ver).
+git log --graph -> muestra las rutas en las que se han hecho operaciones.
+git log -[el numero de comits que quiera ver] -> Muestra la cantidad de commits deseada.
+
+// Comparar cambios.
+git diff [Hash Hash1] -> muestra la diferencia entre la version actual y ese Hash, en caso de dar dos Hash muestra la diferencia entre ellos (el orden en que se pongan influye, se recomienda poner primero el hash mas viejo).
+
+// Para devolver cambios o corregir
+git reset HEAD [nombre del archivo]-> retira de stage (del add) los archivos.
+
+git reset --soft [Hash] -> Este comando pone todos los cambios que se hiceron despues del Hash especificado en stage y retira el Hash de lo que se habia hecho despues.
+
+git reset --mixed [Hash] -> Este comando pone todos los cambios que se hiceron despues del Hash especificado en Unstage y retira el Hash de lo que se habia hecho despues.
+
+git reset --hard [Hash] -> Elimina las cosas hasta del working directory. En caso de hacerlo por equivocación se puede ejecutar el mismo comando con el mismo Hash y el devolverá el borrado.
+
+// Branch
+git branch [Nombre branch] -> Crea una nueva rama
+git branch -l -> lista las branchs del proyecto.
+git branch -d [Nombre branch] elimina la branch especificada.
+git branch -D [Nombre branch] elimina la branch aunque tenga commits ó archivos en uso. (borrado forzoso).
+git branch -m [Nombre branch] [Nombre branch nuevo] -> renombra la branch especificada.
+	
+/* Comando checkout
+git checkout [Nombre branch ó Commit] -> así cambiamos entre branchs o viajamos al estado del proyecto en un commit especifico sin borrar nada.
+
+git checkout -b [Nombre branch] -> crea una rama y me lleva a ella de una vez.
+git checkout -- [Nombre archivo modificado] -> revierte las modificaciones al archivo modificado sin add.
+
+/* Comando Merge y rebase
+Este comando sirve para unir los cambios de diferentes ramas o sincronizar estaciones de trabajo.
+
+Nos hubicamos en la rama en la que queremos que queden todos los cambios una vez allí aplicamos el comando.
+
+git merge [Nombre de la rama que queremos juntar].
+git rebase [Nombre de la rama] -> reescribe la historia del proyecto y tedevuelvea una sola rama. (peligroso)
+git rebase -i [Nombre de la rama] -> es lo mismo solo que ahora nos abre el Editor de texto para hacer el proceso.
+
+/* stash
+Para hacer stash los cambios o archivos tienen que estar en stage.
+git stash -> me guarda el estado de la branch y me permite moverme a otras sin llevar los cambios hechos (Limbo)
+git stash list -> veo todos los stash.
+git stash drop stash@[stash que deseo borrar] -> se borra el stash.
+git stash apply -> ejecuta los cambios pero solo del stash mas reciente.
+git stash apply stash@[stash que deseo borrar] -> ejecuta los acambios del stash especificado.
+
+
+*/ cherry-pick
+Seleccionamos el commit que queremos mover de brnach, vamos la branch donde lo debimos hacer y procedemos.
+git cherry-pick [sha del commit] -> este comando nos permite pasar el commit de una rama a otra
+
+
+
+
+--------------------------------------GitHub---------------------------
+Configurando GitHub
+1) git clone [ruta del repo] -> Ese comando va a clonar un proyecto a un local.
+2) ssh-keygen -t rsa -b 4096 -C ["Email con el que está configurado GitHub"] -> Enlazamos GitHub al local 
+3)cat ~/.ssh/id_rsa.pub -> con este comando vemos la llave ssh que nos creó el git
+
+Enlazar repo local con Repo GitHub
+1)git remote add origin [Ruta del repo que nos da Github] -> Aquí estamos enlazando los repo (Origin es para indicar que esa ruta es la web).
+2)git remote -v -> Verificamos que todo esté bien.
+git remote remove [Nombre del repo que quieres retirar (origin)] -> Retiramos un repo.
+3)git fetch [Nombre Repo] [Nombre Branch] -> esto es para traer lo que tenemos en el repo remoto.
+4)git merge [nombreRepo/NombreBranch] -> Hacemos el merge
+5)git merge origin/master --allow-unrelated-histories -> en caso de que el comando del paso 4 tenga algun error usamos este para corregir y seguir.
+
+Pull -> todo lo anterior en un solo paso.
+
+git pull [nombreRepo] [NombreBranch]-> hace fentch y merge al tiempo.
+
+Push -> Comando para enviar al RepoRemoto todo lo que queramos, Archivos, Tags, Branchs ...
+git push [NombreRepo] [NombreBranch] -> envia los cambios al repo remoto o la branch como tal.
+git push [NombreRepo] [NombreBranch] --tags -> envia a GitHub las tags que teniamos en el local
+
+--------------------------------------Ignore
+Creamos un archivo en nuestro proyecto .gitignore y dentro de el ponemos el nombre del archivo que queremos ignorar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
