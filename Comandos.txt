@@ -98,7 +98,7 @@ Configurando GitHub
 3)cat ~/.ssh/id_rsa.pub -> con este comando vemos la llave ssh que nos creó el git
 
 Enlazar repo local con Repo GitHub
-1)git remote add origin [Ruta del repo que nos da Github] -> Aquí estamos enlazando los repo (Origin es para indicar que esa ruta es la web).
+1)git remote add [nombre del repo externo] [Ruta del repo que nos da Github] -> Aquí estamos enlazando los repo (Origin es para indicar que esa ruta es la web).
 2)git remote -v -> Verificamos que todo esté bien.
 git remote remove [Nombre del repo que quieres retirar (origin)] -> Retiramos un repo.
 3)git fetch [Nombre Repo] [Nombre Branch] -> esto es para traer lo que tenemos en el repo remoto.
