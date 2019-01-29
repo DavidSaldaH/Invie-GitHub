@@ -101,6 +101,7 @@ Enlazar repo local con Repo GitHub
 1)git remote add [nombre del repo externo] [Ruta del repo que nos da Github] -> Aquí estamos enlazando los repo (Origin es para indicar que esa ruta es la web).
 2)git remote -v -> Verificamos que todo esté bien.
 git remote remove [Nombre del repo que quieres retirar (origin)] -> Retiramos un repo.
+git remote -> nos muestra el nombe del repo que tenemos como externo.
 3)git fetch [Nombre Repo] [Nombre Branch] -> esto es para traer lo que tenemos en el repo remoto.
 4)git merge [nombreRepo/NombreBranch] -> Hacemos el merge
 5)git merge origin/master --allow-unrelated-histories -> en caso de que el comando del paso 4 tenga algun error usamos este para corregir y seguir.
